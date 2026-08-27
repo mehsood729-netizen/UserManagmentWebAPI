@@ -48,26 +48,6 @@ The application follows a layered architecture with clear separation of responsi
 * Entity Framework Core ORM Layer
 * SQL Server Database Layer
 
-### Architecture Flow
-
-```text
-Client / Swagger
-       │
-       ▼
-   Controllers
-       │
-       ▼
-    Services
-       │
-       ▼
-  Repositories
-       │
-       ▼
-Entity Framework Core
-       │
-       ▼
-    SQL Server
-```
 
 ### Design Principles
 
