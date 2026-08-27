@@ -270,9 +270,11 @@ Using Visual Studio:
 
 * Set **UserManagmentWebAPI** as the Startup Project.
 * Press **F5** or **Ctrl + F5**.
-* The API will start running.
+* Navigate to the application URL.
 
-Using .NET CLI:
+
+
+
 
 ```bash
 dotnet run
