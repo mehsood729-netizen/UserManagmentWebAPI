@@ -558,7 +558,7 @@ This project is currently developed for learning and educational purposes.
 
 **Naseem Shah**
 
-GitHub: [mehsood729-netizen](https://github.com/mehsood729-netizen?utm_source=chatgpt.com)
+GitHub: [mehsood729-netizen](https://github.com/mehsood729-netizen?)
 
 ---
 
