@@ -16,6 +16,18 @@ namespace UserManagmentWebAPI.Controllers
         }
 
 
+        [HttpPost("User-Login")]
+        public async Task<IActionResult> Login([FromBody]LoginDTO request)
+        {
+          var response =  await _authenticationServices.LoginAsync(request);
+            if(!response.IsSuccess)
+            {
+                return BadRequest(response);
+            }
+            return Ok(response);
+        }
+            
+
         [HttpPost("UserRegistration")]
         public async Task<IActionResult> RegisterUser([FromBody] UserRegisterDTO request)
         {

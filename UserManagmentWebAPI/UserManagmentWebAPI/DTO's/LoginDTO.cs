@@ -1,7 +1,6 @@
 ﻿namespace UserManagmentWebAPI.DTO_s
 {
-    public class LoginDTO
-    {
-        public record Logindto(string Identifier, string password);
-    }
+    
+        public record LoginDTO(string Identifier, string password);
+    
 }

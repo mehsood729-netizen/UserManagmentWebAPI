@@ -16,6 +16,22 @@ namespace UserManagmentWebAPI.Services.Implementation
             _authRepo = authRepository;
             _passwordEncryptor = passwordEncryptor;
         }
+
+        public async Task<APIResponse<string>> LoginAsync(LoginDTO loginDTO)
+        {
+            var user = await _authRepo.LoginAsync(loginDTO.Identifier);
+            if (user is not null)
+            {
+                var response = _passwordEncryptor.VerifyPassword(loginDTO.password, user.Hash, user.Salt);
+                if (response)
+                {
+                    return APIResponse<string>.SuccessResponse("Login Successfully");
+                }
+                return APIResponse<string>.ErrorResponse("Invalid Creadentials");
+            }
+            return APIResponse<string>.ErrorResponse("Invalid Creadentials");
+        }
+
         public async Task<APIResponse<string>> UserRegisterAsync(UserRegisterDTO userRegisterDTO)
         {
             {

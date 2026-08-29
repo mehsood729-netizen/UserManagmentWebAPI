@@ -6,5 +6,6 @@ namespace UserManagmentWebAPI.Services.Interface
     public interface IAuthenticationServices
     {
         Task<APIResponse<string>> UserRegisterAsync(UserRegisterDTO userRegisterDTO);
+        Task<APIResponse<string>> LoginAsync(LoginDTO loginDTO);
     }
 }
