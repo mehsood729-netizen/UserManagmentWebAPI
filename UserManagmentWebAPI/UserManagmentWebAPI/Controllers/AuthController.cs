@@ -16,7 +16,7 @@ namespace UserManagmentWebAPI.Controllers
         }
 
 
-        [HttpPost("User-Login")]
+        [HttpPost("UserLogin")]
         public async Task<IActionResult> Login([FromBody]LoginDTO request)
         {
           var response =  await _authenticationServices.LoginAsync(request);
