@@ -9,18 +9,21 @@ using UserManagmentWebAPI.Extensions.Validator;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
 
-builder.Services.SwaggarConfigration();
+
 
 builder.Services.AddFluentValidationAutoValidation()
-    .AddValidatorsFromAssemblyContaining<ValidateUserRegisterDTO>();
+    .AddValidatorsFromAssemblyContaining<ValidateUserRegisterDTO>()
+    .AddValidatorsFromAssemblyContaining<ValidateLoginDTO>()
+    .SwaggarConfigration()
+    .JwtConfigration()
+    .MyRepo(builder.Configuration)
+    .MyServices();
 
 
-builder.Services.MyRepo(builder.Configuration);
-builder.Services.MyServices();
+
+
 var app = builder.Build();
 app.MiddlewareConfig();
 

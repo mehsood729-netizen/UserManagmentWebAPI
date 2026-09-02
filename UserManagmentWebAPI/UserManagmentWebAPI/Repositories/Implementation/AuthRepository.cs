@@ -15,7 +15,7 @@ namespace UserManagmentWebAPI.Repositories.Implementation
         public async Task<User> LoginAsync(string Identifier)
         {
             var existingUser = await _dbContext.Users.FirstOrDefaultAsync(x => x.Email == Identifier || x.UserName == Identifier || x.Contact == Identifier);
-            return existingUser!;
+            return existingUser;
         }
 
         public async Task<User> UserRegistration(User user)

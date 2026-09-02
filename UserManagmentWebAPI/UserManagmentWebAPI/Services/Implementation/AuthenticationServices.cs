@@ -4,6 +4,7 @@ using UserManagmentWebAPI.DTO_s;
 using UserManagmentWebAPI.Extensions.Mappers;
 using UserManagmentWebAPI.Repositories.Interface;
 using UserManagmentWebAPI.Services.Interface;
+using UserManagmentWebAPI.Utilities;
 
 namespace UserManagmentWebAPI.Services.Implementation
 {
@@ -11,10 +12,12 @@ namespace UserManagmentWebAPI.Services.Implementation
     {
         private readonly IAuthRepository _authRepo;
         private readonly IPasswordEncryptor _passwordEncryptor;
-        public AuthenticationServices(IAuthRepository authRepository, IPasswordEncryptor passwordEncryptor)
+        private readonly IJWTService _jwtService;
+        public AuthenticationServices(IAuthRepository authRepository, IPasswordEncryptor passwordEncryptor, IJWTService jWTService)
         {
             _authRepo = authRepository;
             _passwordEncryptor = passwordEncryptor;
+            _jwtService = jWTService;
         }
 
         public async Task<APIResponse<string>> LoginAsync(LoginDTO loginDTO)
@@ -25,7 +28,7 @@ namespace UserManagmentWebAPI.Services.Implementation
                 var response = _passwordEncryptor.VerifyPassword(loginDTO.password, user.Hash, user.Salt);
                 if (response)
                 {
-                    return APIResponse<string>.SuccessResponse("Login Successfully");
+                    return APIResponse<string>.SuccessResponse(_jwtService.CreateJWT(user));
                 }
                 return APIResponse<string>.ErrorResponse("Invalid Creadentials");
             }

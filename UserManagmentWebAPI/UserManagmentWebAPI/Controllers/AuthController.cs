@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using UserManagmentWebAPI.DTO_s;
 using UserManagmentWebAPI.Services.Interface;
+using UserManagmentWebAPI.Utilities;
 
 namespace UserManagmentWebAPI.Controllers
 {
@@ -10,13 +11,17 @@ namespace UserManagmentWebAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthenticationServices _authenticationServices;
-        public AuthController(IAuthenticationServices authServices)
+        private readonly IPasswordEncryptor _passwordEncryptor;
+       /// private readonly IJWTService _jwtService;
+        public AuthController(IAuthenticationServices authServices,IPasswordEncryptor passwordEncryptor)
         {
             _authenticationServices = authServices;
+            _passwordEncryptor = passwordEncryptor;
+           // _jwtService = service;
         }
 
 
-        [HttpPost("UserLogin")]
+        [HttpPost("User-Login")]
         public async Task<IActionResult> Login([FromBody]LoginDTO request)
         {
           var response =  await _authenticationServices.LoginAsync(request);
