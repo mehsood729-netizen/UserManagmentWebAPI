@@ -17,6 +17,7 @@ builder.Services.AddFluentValidationAutoValidation()
     .AddValidatorsFromAssemblyContaining<ValidateUserRegisterDTO>()
     .AddValidatorsFromAssemblyContaining<ValidateLoginDTO>()
     .SwaggarConfigration()
+    .AuthenticationConfig(builder.Configuration)
     .JwtConfigration()
     .MyRepo(builder.Configuration)
     .MyServices();

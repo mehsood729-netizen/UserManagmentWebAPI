@@ -1,6 +1,6 @@
 ﻿namespace UserManagmentWebAPI.Data.Enums
 {
-    public enum Role
+    public enum Rule
     {
         Admin = 0,
         User = 1,

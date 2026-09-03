@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UserManagmentWebAPI.DTO_s;
 using UserManagmentWebAPI.Services.Interface;
@@ -6,18 +7,19 @@ using UserManagmentWebAPI.Utilities;
 
 namespace UserManagmentWebAPI.Controllers
 {
+  
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
         private readonly IAuthenticationServices _authenticationServices;
         private readonly IPasswordEncryptor _passwordEncryptor;
-       /// private readonly IJWTService _jwtService;
-        public AuthController(IAuthenticationServices authServices,IPasswordEncryptor passwordEncryptor)
+       private readonly IJWTService _jwtService;
+        public AuthController(IAuthenticationServices authServices,IPasswordEncryptor passwordEncryptor,IJWTService service)
         {
             _authenticationServices = authServices;
             _passwordEncryptor = passwordEncryptor;
-           // _jwtService = service;
+            _jwtService = service;
         }
 
 
@@ -31,8 +33,8 @@ namespace UserManagmentWebAPI.Controllers
             }
             return Ok(response);
         }
-            
 
+        [Authorize(Roles ="User")]
         [HttpPost("UserRegistration")]
         public async Task<IActionResult> RegisterUser([FromBody] UserRegisterDTO request)
         {
